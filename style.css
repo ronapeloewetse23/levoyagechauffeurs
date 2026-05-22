@@ -306,13 +306,11 @@ footer {
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 30px;
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .footer-section {
@@ -366,9 +364,9 @@ footer {
 @media (max-width: 768px) {
 
     .footer-container {
-        flex-direction: column;
-        text-align: center;
-    }
+    flex-direction: column;
+    text-align: center;
+  }
 
     .social-links {
         align-items: center;
