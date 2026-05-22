@@ -5,45 +5,85 @@
     <title>Booking</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
-     <div class="navbar">
+    <div class="navbar">
+
         <div class="logo">
-  <img src="images/logo.png" alt="LE VOYAGE">
-</div>
+            <img src="images/logo.png" alt="LE VOYAGE">
+        </div>
+
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="cars.html">Cars</a></li>
             <li><a href="booking.html">Booking</a></li>
-            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
+
     </div>
 </header>
 
-<form action="payment.html">
-    <h2>Book a Car</h2>
-    <input type="text" placeholder="Name" required>
-    <input type="email" placeholder="Email" required>
+<main>
 
-    <select>
-        <option>Select Car</option>
+<form action="payment.html">
+
+    <h2>Book a Car</h2>
+
+    <input type="text"
+           placeholder="Name"
+           required>
+
+    <input type="email"
+           placeholder="Email"
+           required>
+
+    <!-- CAR SELECTION -->
+    <select required>
+        <option value="">Select Car</option>
         <option>BMW-X5</option>
         <option>LC300</option>
         <option>BMW-340i</option>
         <option>GLE63S</option>
     </select>
 
-    <input type="date" placeholder="Starting Date" required>
-    <input type="date" placeholder="Ending Date" required>
+    <!-- QUANTITY SECTION -->
+    <label for="quantity">Number of Cars</label>
 
-    <button onclick="location.href='payment.html'">Confirm Booking</button>
+    <input type="number"
+           id="quantity"
+           min="1"
+           max="10"
+           value="1"
+           required>
+
+    <!-- RENTAL DATES -->
+    <input type="date"
+           placeholder="Starting Date"
+           required>
+
+    <input type="date"
+           placeholder="Ending Date"
+           required>
+
+    <!-- SUBMIT BUTTON -->
+    <button type="submit">
+        Confirm Booking
+    </button>
+
 </form>
 
+</main>
+
+<footer>
+    © 2026 Le Voyage Executive Chauffeurs and Car Rentals
+</footer>
 
 <script src="javascript.js"></script>
+
 </body>
-<footer>© 2026 Le Voyage Executive Chauffeurs and Car Rentals</footer>
 </html>
