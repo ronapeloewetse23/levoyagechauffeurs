@@ -254,38 +254,39 @@
     });
 
     function renderCheckoutSummary() {
-        const summaryContainer = document.getElementById('checkout-items-summary');
-        const totalContainer = document.getElementById('summary-total-price');
+    const summaryContainer = document.getElementById('checkout-items-summary');
+    const totalContainer = document.getElementById('summary-total-price');
 
-        if (checkoutCart.length === 0) {
-            summaryContainer.innerHTML = '<p style="color:#b5baaf; font-size:13px;">No cars selected for dispatch layout.</p>';
-            totalContainer.innerText = 'P0.00';
-            return;
-        }
-
-        summaryContainer.innerHTML = '';
-        let totalSum = 0;
-
-        checkoutCart.forEach(item => {
-            const rowCost = item.price * item.days;
-            totalSum += rowCost;
-
-            summaryContainer.innerHTML += `
-                <div class="checkout-summary-item">
-                    <div style="display:flex; gap:15px; align-items:center;">
-                        <img src="${item.image}" alt="${item.name}" width="65" height="45">
-                        <div>
-                            <div style="font-size:14px; font-weight:600; color:#fff;">${item.name}</div>
-                            <div style="font-size:12px; color:#b5baaf;">${item.days} Day(s) @ P${item.price.toLocaleString()}</div>
-                        </div>
-                    </div>
-                    <div style="font-size:14px; font-weight:600; color:#efbf04;">P${rowCost.toLocaleString()}</div>
-                </div>
-            `;
-        });
-
-        totalContainer.innerText = `P${totalSum.toLocaleString()}`;
+    if (checkoutCart.length === 0) {
+        summaryContainer.innerHTML = '<p style="color:#b5baaf; font-size:13px;">No cars selected.</p>';
+        totalContainer.innerText = 'P0.00';
+        return;
     }
+
+    summaryContainer.innerHTML = '';
+    let totalSum = 0;
+
+    checkoutCart.forEach(item => {
+        // Updates math to combine both numbers securely
+        const rowCost = item.price * item.quantity * item.days;
+        totalSum += rowCost;
+
+        summaryContainer.innerHTML += `
+            <div class="checkout-summary-item">
+                <div style="display:flex; gap:15px; align-items:center;">
+                    <img src="${item.image}" alt="${item.name}" width="65" height="45">
+                    <div>
+                        <div style="font-size:14px; font-weight:600; color:#fff;">${item.name}</div>
+                        <div style="font-size:12px; color:#b5baaf;">${item.quantity} Car(s) × ${item.days} Day(s)</div>
+                    </div>
+                </div>
+                <div style="font-size:14px; font-weight:600; color:#efbf04;">P${rowCost.toLocaleString()}</div>
+            </div>
+        `;
+    });
+
+    totalContainer.innerText = `P${totalSum.toLocaleString()}`;
+}
 
     // Optional dynamic calculation step hook based on date adjustments
     function calculateCustomDays() {
