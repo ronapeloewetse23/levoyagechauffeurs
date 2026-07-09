@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed | Le Voyage</title>
+    <style>
+        body {
+            background-color: #0d0e10;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .receipt-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+        }
+        .success-icon {
+            font-size: 48px;
+            color: #efbf04;
+            margin-bottom: 10px;
+        }
+        h2 {
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .ref-no {
+            color: #b5baaf;
+            font-size: 14px;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .item-details h4 {
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            font-size: 15px;
+        }
+        .item-details p {
+            margin: 0;
+            color: #b5baaf;
+            font-size: 12px;
+        }
+        .item-price {
+            color: #efbf04;
+            font-weight: bold;
+        }
+        .total-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #efbf04;
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .total-section span {
+            color: #efbf04;
+        }
+        .footer-note {
+            text-align: center;
+            color: #b5baaf;
+            font-size: 13px;
+            margin-top: 40px;
+            line-height: 1.6;
+        }
+        .btn-home {
+            display: block;
+            text-align: center;
+            background: #efbf04;
+            color: #0d0e10;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: background 0.2s;
+        }
+        .btn-home:hover {
+            background: #d4a903;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="receipt-card">
+        <div class="header">
+            <div class="success-icon">✓</div>
+            <h2>Booking Confirmed</h2>
+            <p class="ref-no">Reference: <span id="receipt-ref">LV-XXXXX</span></p>
+        </div>
+
+        <div id="receipt-items-container">
+            <!-- JavaScript will drop the rented cars here -->
+        </div>
+
+        <div class="total-section">
+            <div>TOTAL PAID</div>
+            <div><span id="receipt-grand-total">P0.00</span></div>
+        </div>
+
+        <div class="footer-note">
+            <p>Thank you for choosing <strong>Le Voyage Chauffeurs</strong>.<br>A copy of this confirmation receipt and rental agreement framework has been dispatched to your email.</p>
+        </div>
+
+        <a href="cars.html" class="btn-home">Return to Fleet</a>
+    </div>
+
+    <!-- Script connection to draw the data immediately -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Fetch data from memory
+            const receiptCart = JSON.parse(localStorage.getItem('levoyage_cart')) || [];
+            const container = document.getElementById('receipt-items-container');
+            const totalElement = document.getElementById('receipt-grand-total');
+            const refElement = document.getElementById('receipt-ref');
+
+            // 2. Generate a random booking reference code (e.g., LV-74921)
+            const randomRef = 'LV-' + Math.floor(10000 + Math.random() * 90000);
+            refElement.innerText = randomRef;
+
+            // Failsafe if they land here with no cars in memory
+            if (receiptCart.length === 0) {
+                container.innerHTML = '<p style="color:#b5baaf; text-align:center;">No active booking data found.</p>';
+                return;
+            }
+
+            // 3. Render out the item list rows
+            let grandTotal = 0;
+            container.innerHTML = '';
+
+            receiptCart.forEach(item => {
+                const itemCost = item.price * item.quantity * item.days;
+                grandTotal += itemCost;
+
+                container.innerHTML += `
+                    <div class="item-row">
+                        <div class="item-details">
+                            <h4>${item.name}</h4>
+                            <p>${item.quantity} Car(s) × ${item.days} Day(s)</p>
+                        </div>
+                        <div class="item-price">P${itemCost.toLocaleString()}</div>
+                    </div>
+                `;
+            });
+
+            // 4. Update total display
+            totalElement.innerText = `P${grandTotal.toLocaleString()}`;
+
+            // 5. CLEAR MEMORY BUCKETS 
+            // This prevents them from seeing the old selection if they click back or visit booking.html again
+            localStorage.removeItem('levoyage_cart');
+        });
+    </script>
+</body>
+</html>
