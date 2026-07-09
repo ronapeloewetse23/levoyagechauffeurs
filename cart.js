@@ -1,14 +1,11 @@
 // ==========================================
 // 1. GLOBAL MEMORY CONFIGURATION
 // ==========================================
-// Initialize the cart array from localStorage, or set it empty if it's their first time
 let cart = JSON.parse(localStorage.getItem('levoyage_cart')) || [];
 
-// Run setup when the page finishes loading
 document.addEventListener('DOMContentLoaded', () => {
     setupAddToCartButtons();
     
-    // Only run the cart rendering if we are actually on the booking page
     if (document.getElementById('cart-items-container')) {
         renderCartPage();
     }
@@ -22,7 +19,7 @@ function setupAddToCartButtons() {
     
     buttons.forEach(button => {
         button.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevents the browser from navigating away before saving
+            e.preventDefault(); 
 
             const btn = e.target;
             const carItem = {
@@ -30,10 +27,10 @@ function setupAddToCartButtons() {
                 name: btn.getAttribute('data-name'),
                 price: parseFloat(btn.getAttribute('data-price')),
                 image: btn.getAttribute('data-image'),
-                days: 1 // default to 1 day rental
+                quantity: 1, // Default to 1 vehicle
+                days: 1      // Default to 1 rental day
             };
 
-            // Failsafe to ensure data tags exist in HTML
             if (!carItem.id || isNaN(carItem.price)) {
                 console.error("Missing data attributes on button. Check your cars.html!");
                 return;
@@ -48,14 +45,13 @@ function addToCart(item) {
     const existingItem = cart.find(cartItem => cartItem.id === item.id);
     
     if (existingItem) {
-        existingItem.days += 1; // If already clicked, add an extra rental day
+        // If they click it again on the cars page, we bump the car quantity
+        existingItem.quantity += 1; 
     } else {
         cart.push(item);
     }
     
     saveCart();
-    
-    // Instantly redirect to the booking review page
     window.location.href = 'booking.html';
 }
 
@@ -69,7 +65,6 @@ function saveCart() {
 function renderCartPage() {
     const container = document.getElementById('cart-items-container');
     const summaryBox = document.getElementById('cart-summary-box'); 
-    // Fallback for different ID namings
     const totalElement = document.getElementById('cart-total-price') || document.getElementById('cart-total');
     
     if (cart.length === 0) {
@@ -88,25 +83,49 @@ function renderCartPage() {
     let overallTotal = 0;
     
     cart.forEach(item => {
-        const itemTotal = item.price * item.days;
+        // Core Math Formula: Price * Quantity of Cars * Number of Days
+        const itemTotal = item.price * item.quantity * item.days;
         overallTotal += itemTotal;
         
         container.innerHTML += `
-            <div class="cart-item-row" style="display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 20px; margin-bottom: 20px; border-radius: 6px;">
-                <img src="${item.image}" alt="${item.name}" width="100" height="65" style="border-radius:4px; object-fit:cover;">
-                <div class="cart-details" style="flex: 2; padding-left: 20px;">
-                    <h4 style="margin:0 0 5px 0; color:#fff; text-transform:uppercase;">${item.name}</h4>
-                    <p style="margin:0; color:#b5baaf; font-size:13px;">P${item.price.toLocaleString()} / day</p>
+            <div class="cart-item-row" style="display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 25px; margin-bottom: 20px; border-radius: 6px; flex-wrap: wrap; gap: 15px;">
+                
+                <!-- Car Info Block -->
+                <div style="display: flex; align-items: center; gap: 20px; flex: 1.5; min-width: 200px;">
+                    <img src="${item.image}" alt="${item.name}" width="100" height="65" style="border-radius:4px; object-fit:cover;">
+                    <div>
+                        <h4 style="margin:0 0 5px 0; color:#fff; text-transform:uppercase; font-size:16px;">${item.name}</h4>
+                        <p style="margin:0; color:#b5baaf; font-size:13px;">P${item.price.toLocaleString()} / day per car</p>
+                    </div>
                 </div>
-                <div class="cart-days-control" style="display:flex; align-items:center; gap:15px;">
-                    <button onclick="changeDays('${item.id}', ${item.days - 1})" style="background:#efbf04; border:none; border-radius:4px; width:28px; height:28px; font-weight:bold; cursor:pointer;">-</button>
-                    <span style="color:#fff;">${item.days} Day(s)</span>
-                    <button onclick="changeDays('${item.id}', ${item.days + 1})" style="background:#efbf04; border:none; border-radius:4px; width:28px; height:28px; font-weight:bold; cursor:pointer;">+</button>
+
+                <!-- Control 1: Quantity of Cars -->
+                <div style="flex: 1; min-width: 130px; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                    <span style="font-size: 11px; color: #b5baaf; text-transform: uppercase;">Vehicles</span>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <button onclick="changeQuantity('${item.id}', ${item.quantity - 1})" style="background:#efbf04; border:none; border-radius:4px; width:26px; height:26px; font-weight:bold; cursor:pointer;">-</button>
+                        <span style="color:#fff; font-weight: 600; min-width: 30px; text-align:center;">${item.quantity}</span>
+                        <button onclick="changeQuantity('${item.id}', ${item.quantity + 1})" style="background:#efbf04; border:none; border-radius:4px; width:26px; height:26px; font-weight:bold; cursor:pointer;">+</button>
+                    </div>
                 </div>
-                <div class="cart-item-total" style="flex: 1; text-align:right; color:#efbf04; font-weight:bold; padding-right:20px;">
+
+                <!-- Control 2: Quantity of Days -->
+                <div style="flex: 1; min-width: 130px; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                    <span style="font-size: 11px; color: #b5baaf; text-transform: uppercase;">Duration</span>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <button onclick="changeDays('${item.id}', ${item.days - 1})" style="background:#efbf04; border:none; border-radius:4px; width:26px; height:26px; font-weight:bold; cursor:pointer;">-</button>
+                        <span style="color:#fff; font-weight: 600; min-width: 50px; text-align:center;">${item.days} Day${item.days > 1 ? 's' : ''}</span>
+                        <button onclick="changeDays('${item.id}', ${item.days + 1})" style="background:#efbf04; border:none; border-radius:4px; width:26px; height:26px; font-weight:bold; cursor:pointer;">+</button>
+                    </div>
+                </div>
+
+                <!-- Line Item Total -->
+                <div style="flex: 1; text-align:right; color:#efbf04; font-weight:bold; font-size:16px; min-width: 100px;">
                     P${itemTotal.toLocaleString()}
                 </div>
-                <button class="remove-btn" onclick="removeFromCart('${item.id}')" style="background:none; border:none; color:#ff4a4a; font-size:18px; cursor:pointer;">✕</button>
+
+                <!-- Delete Action -->
+                <button onclick="removeFromCart('${item.id}')" style="background:none; border:none; color:#ff4a4a; font-size:18px; cursor:pointer; padding: 0 10px;">✕</button>
             </div>
         `;
     });
@@ -119,30 +138,36 @@ function renderCartPage() {
 // ==========================================
 // 4. CART CONTROLS
 // ==========================================
+window.changeQuantity = function(id, newQty) {
+    if (newQty < 1) return; 
+    const item = cart.find(cartItem => cartItem.id === id);
+    if (item) {
+        item.quantity = newQty;
+        saveCart();
+        renderCartPage(); 
+    }
+}
+
 window.changeDays = function(id, newDays) {
-    if (newDays < 1) return; // Must rent for at least 1 day
+    if (newDays < 1) return; 
     const item = cart.find(cartItem => cartItem.id === id);
     if (item) {
         item.days = newDays;
         saveCart();
-        renderCartPage(); // Redraw layout with new math
+        renderCartPage(); 
     }
 }
 
 window.removeFromCart = function(id) {
     cart = cart.filter(cartItem => cartItem.id !== id);
     saveCart();
-    renderCartPage(); // Redraw layout without the item
+    renderCartPage(); 
 }
 
-// Redirects to the checkout sheet
 window.goToCheckout = function() {
     window.location.href = 'checkout.html';
 }
 
-// ==========================================
-// 5. MOBILE MENU TOGGLE
-// ==========================================
 window.toggleMenu = function() {
     const navLinks = document.querySelector('.nav-links');
     if (navLinks) {
