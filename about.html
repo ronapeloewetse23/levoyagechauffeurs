@@ -4,7 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Le Voyage</title>
+    
+    <!-- External stylesheet link kept for your header/footer styles -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Built-in styles to guarantee the single-row layout from image_58275b.png works perfectly -->
+    <style>
+        /* Base page adjustments */
+        body {
+            background-color: #0b0c10; /* Elegant dark background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #f7f5f5;
+        }
+
+        /* Value Proposition Section styling matching your reference layout */
+        .benefits-section {
+            max-width: 1250px;
+            margin: 80px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .benefits-title {
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #f7f5f5;
+            margin-bottom: 50px;
+        }
+
+        /* Flexbox wrapper that forces all 5 items onto one single line */
+        .benefits-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            gap: 10px;
+        }
+
+        .benefit-item {
+            flex: 1;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* Creates the thin vertical dividers between columns seen in luxury layouts */
+        .benefit-item:not(:last-child) {
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .benefit-icon {
+            color: #efbf04; /* Premium Gold matching your theme */
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-item h3 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #f7f5f5;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            min-height: 36px; /* Keeps your text perfectly aligned even if titles wrap */
+        }
+
+        .benefit-item p {
+            font-size: 13px;
+            color: #b5baaf;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Luxury styled Terms & Conditions section */
+        .terms-section {
+            max-width: 1200px;
+            margin: 80px auto 120px auto;
+            padding: 0 20px;
+        }
+
+        .terms-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 40px;
+        }
+
+        .terms-card h2 {
+            font-size: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #efbf04;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .terms-grid {
+            display: flex;
+            gap: 40px;
+        }
+
+        .terms-block {
+            flex: 1;
+        }
+
+        .terms-block p {
+            font-size: 13.5px;
+            color: #b5baaf;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .terms-block p strong {
+            color: #f7f5f5;
+            display: block;
+            font-size: 14px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Clean responsive layout collapse for smaller screens/mobiles */
+        @media (max-width: 900px) {
+            .benefits-grid {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .benefit-item:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding-bottom: 30px;
+                width: 100%;
+            }
+            .benefit-item h3 {
+                min-height: auto;
+            }
+            .terms-grid {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -16,7 +166,7 @@
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="about.html" style="color: #efbf04;">About</a></li>
             <li><a href="cars.html">Cars</a></li>
             <li><a href="booking.html">Booking</a></li>
             <li><a href="contacts.html">Contact</a></li>
@@ -24,13 +174,13 @@
     </div>
 </header>
 
-<!-- 1. HERO HEADER AREA -->
-<section class="hero">
-    <h1>About Le Voyage</h1>
-    <p>We provide exclusive, premium executive chauffeur and luxury car rental services across Botswana.</p>
+<!-- 1. HERO MAIN HEADER -->
+<section class="hero" style="text-align: center; padding: 60px 20px;">
+    <h1 style="font-size: 32px; letter-spacing: 3px; font-weight: 300; margin-bottom: 10px;">ABOUT LE VOYAGE</h1>
+    <p style="color: #b5baaf; font-size: 15px;">We provide reliable and premium executive chauffeur and luxury car rental services.</p>
 </section>
 
-<!-- 2. PARTNERSHIP / VALUE PROP SECTION (The 5-Column Feature Grid) -->
+<!-- 2. VALUE PROP GRID (Horizontal Row Layout inspired by image_58275b.png) -->
 <section class="benefits-section">
     <h2 class="benefits-title">Why Partner with Le Voyage?</h2>
     
@@ -38,7 +188,7 @@
         <!-- Item 1: Earn More -->
         <div class="benefit-item">
             <div class="benefit-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="16"/><path d="M16 9.5A2.5 2.5 0 0 0 13.5 7h-1a2.5 2.5 0 0 0 0 5h1a2.5 2.5 0 0 1 0 5h-1A2.5 2.5 0 0 1 9 14.5"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="16"/><path d="M16 9.5A2.5 2.5 0 0 0 13.5 7h-1a2.5 2.5 0 0 0 0 5h1a2.5 2.5 0 0 1 0 5h-1A2.5 2.5 0 0 1 9 14.5"/></svg>
             </div>
             <h3>Earn More From Your Car</h3>
             <p>Turn your luxury vehicle into a reliable source of passive income.</p>
@@ -47,7 +197,7 @@
         <!-- Item 2: Vetted Clientele -->
         <div class="benefit-item">
             <div class="benefit-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/><path d="m9 12 2 2 4-4"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
             <h3>Vetted & Trusted Clientele</h3>
             <p>Your car is rented only to pre-screened, high-end clients.</p>
@@ -56,7 +206,7 @@
         <!-- Item 3: Flexible Control -->
         <div class="benefit-item">
             <div class="benefit-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><circle cx="8" cy="14" r="1"/><circle cx="12" cy="14" r="1"/><circle cx="16" cy="14" r="1"/><circle cx="8" cy="18" r="1"/><circle cx="12" cy="18" r="1"/><circle cx="16" cy="18" r="1"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><circle cx="8" cy="14" r="1"/><circle cx="12" cy="14" r="1"/><circle cx="16" cy="14" r="1"/><circle cx="8" cy="18" r="1"/><circle cx="12" cy="18" r="1"/><circle cx="16" cy="18" r="1"/></svg>
             </div>
             <h3>Flexible Control</h3>
             <p>You decide the availability. We handle the rest.</p>
@@ -65,7 +215,7 @@
         <!-- Item 4: Full Protection -->
         <div class="benefit-item">
             <div class="benefit-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/><path d="M12 22V2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/><path d="M12 22V2"/></svg>
             </div>
             <h3>Full Protection</h3>
             <p>Your vehicle is fully insured and professionally managed.</p>
@@ -74,7 +224,7 @@
         <!-- Item 5: Professional Presentation -->
         <div class="benefit-item">
             <div class="benefit-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 21a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><path d="M12 2v2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 21a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><path d="M12 2v2"/></svg>
             </div>
             <h3>Professional Presentation</h3>
             <p>Your car is showcased to a discerning audience that values excellence.</p>
@@ -82,18 +232,18 @@
     </div>
 </section>
 
-<!-- 3. RENTAL TERMS & CONDITIONS SECTION -->
+<!-- 3. PREMIUM TERMS AND CONDITIONS CARD -->
 <section class="terms-section">
     <div class="terms-card">
-        <h2>Terms & Conditions</h2>
+        <h2>Terms and Conditions</h2>
         <div class="terms-grid">
             <div class="terms-block">
-                <p><strong>Day Rates:</strong> All prices listed above are daily rates. Discounts apply exclusively to consecutive rental bookings of 3 days and over.</p>
-                <p><strong>Chauffeur Policy:</strong> Provided vehicles include a dedicated security-trained chauffeur operational for up to 10 hours per day. Extended service hours will generate an additional surcharge calculated at 15% of the vehicle's standard daily rate.</p>
+                <p><strong>Day Rates:</strong> All prices listed above are daily rates. Discounts are strictly subject to bookings of 3 consecutive days and over.</p>
+                <p><strong>Chauffeur Hours:</strong> Cars quoted come with a secure driver who operates for up to 10 hours per day. Any extended operation charges will be billed at 15% of the standard daily rate listed.</p>
             </div>
             <div class="terms-block">
-                <p><strong>Inclusions:</strong> Quotations cover comprehensive operational operational costs including driver accommodation, meals, fuel, toll fees, and premium vehicle maintenance/car washes.</p>
-                <p><strong>Payment & Cancellation:</strong> To securely guarantee vehicle allocation, 100% upfront payment is strictly required. Cancellations incur a standard 25% fee.</p>
+                <p><strong>All-Inclusive Luxury:</strong> This custom quote comprehensively includes driver food, fuel, accommodation, road tolls, and specialized car washing.</p>
+                <p><strong>Securing & Cancellations:</strong> A standard cancellation fee of 25% applies to all processed requests. 100% payment upfront is required to securely hold and finalize car bookings.</p>
             </div>
         </div>
     </div>
