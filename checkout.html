@@ -318,17 +318,49 @@
     }
 
     // Checkout submission handling block
-    function processCheckout(event) {
-        event.preventDefault();
-        if(checkoutCart.length === 0) {
-            alert('Your active allocation selection sheet is empty.');
-            return;
-        }
-        
-        alert('Booking request broadcasted! 100% Upfront Invoice wire instructions are being prepared.');
-        // Clear storage data arrays upon validation success
-        window.location.href = 'receipt.html'; 
+    // Checkout submission handling block
+function processCheckout(event) {
+    event.preventDefault();
+    if(checkoutCart.length === 0) {
+        alert('Your active allocation selection sheet is empty.');
+        return;
     }
+
+    // 1. Get the form data the user typed in
+    const form = event.target;
+    const firstName = form.querySelector('input[placeholder="John"]').value;
+    const lastName = form.querySelector('input[placeholder="Doe"]').value;
+    const customerEmail = form.querySelector('input[type="email"]').value;
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    const totalCost = document.getElementById('summary-total-price').innerText;
+
+    // 2. Format the car list into clean text for the email body
+    let bookingSummaryText = "";
+    checkoutCart.forEach(item => {
+        bookingSummaryText += `${item.name} (${item.quantity}x) for ${item.days} days\n`;
+    });
+
+    alert('Processing your premium allocation request...');
+
+    // 3. FIRE THE REAL EMAIL
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        customer_name: firstName + " " + lastName,
+        customer_email: customerEmail,
+        rental_dates: `${startDate} to ${endDate}`,
+        fleet_details: bookingSummaryText,
+        total_price: totalCost
+    })
+    .then(() => {
+        // SUCCESS: The email sent perfectly! Go to the receipt page
+        window.location.href = 'receipt.html'; 
+    })
+    .catch((error) => {
+        console.error("Email failed to send...", error);
+        // Fallback: Head to the receipt page anyway so the user experience doesn't break
+        window.location.href = 'receipt.html'; 
+    });
+}
 </script>
 
 </body>
