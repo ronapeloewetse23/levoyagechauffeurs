@@ -1,84 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Rentals</title>
+    <title>Le Voyage | Executive Chauffeur & Luxury Car Rentals</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- AOS (Animate On Scroll) Library Stylesheet -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* Base page theme settings */
+        body {
+            background-color: #0b0c10;
+            color: #f7f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 90vh;
+            background: linear-gradient(rgba(11, 12, 16, 0.7), rgba(11, 12, 16, 0.9)), url('images/hero-bg.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .hero-content h1 span {
+            color: #efbf04;
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            color: #b5baaf;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .cta-btn {
+            background: #efbf04;
+            color: #000;
+            padding: 15px 35px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.2s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            background: #d4a703;
+            transform: scale(1.05);
+        }
+
+        /* Features Grid Preview Section */
+        .features-container {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 30px;
+            border-radius: 6px;
+            text-align: left;
+            transition: border-color 0.3s ease;
+        }
+
+        .feature-box:hover {
+            border-color: rgba(239, 191, 4, 0.4);
+        }
+
+        .feature-box h3 {
+            color: #efbf04;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .feature-box p {
+            color: #b5baaf;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Mobile Adaptation */
+        @media (max-width: 900px) {
+            .hero-content h1 {
+                font-size: 32px;
+            }
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <div class="navbar">
-        <div class="logo">
-  <img src="images/logo.png" alt="LE VOYAGE">
-</div>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">Partner up</a></li>
-            <li><a href="cars.html">Cars</a></li>
-            <li><a href="booking.html">Booking</a></li>
-            <li><a href="contacts.html">Contact</a></li>
-        </ul>
-    </div>
-</header>
-
-<section class="hero">
-    <h1>GROW YOUR REACH. EARN MORE. PARTNER WITH LE VOYAGE.</h1>
-    <button onclick="location.href='cars.html'">Browse Cars</button>
-</section>
-
-<section class="cars">
-    <a href="cars.html" class="car-card">
-        <img src="images/2023-bmw-x7-xdrive-40i134-641c5b3ca7165-removebg-preview.png">
-        <h3>BMW-X7</h3>
-        <p>BWP8000</p>
-    </a>
-
-    <a href="cars.html" class="car-card">
-        <img src="images/47e0d91e5e6c5b3c70b21b86d93d6016x-removebg-preview (1).png">
-        <h3>GLE450</h3>
-        <p>BWP5450</p>
-    </a>
-
-    <a href="cars.html" class="car-card">
-        <img src="images/porsche-panamera4-removebg-preview.png">
-        <h3>PANAMERA</h3>
-        <p>BWP5000</p>
-    </a>
-</section>
-
-<footer class="footer">
-
-    <div class="footer-container">
-
-
-
-        <div class="footer-section">
-            <h3>Contact</h3>
-
-            <p>Email: levoyagechauffers@gmail.com</p>
-            <p>Phone: +267 77 503 760</p>
-        </div>
-
-        <div class="footer-section">
-            <h3>Follow Us</h3>
-
-            <div class="social-links">
-                <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
-                <a href="#">TikTok</a>
+    <!-- Main Header & Navigation -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html" style="display: block; outline: none;">
+                    <img src="images/logo.png" alt="LE VOYAGE">
+                </a>
             </div>
+            <ul class="nav-links">
+                <li><a href="index.html" style="color: #efbf04;">Home</a></li>
+                <li><a href="about.html">Partner up</a></li>
+                <li><a href="cars.html">Cars</a></li>
+                <li><a href="booking.html">Booking</a></li>
+            </ul>
         </div>
+    </header>
 
+    <!-- Hero Section with Motion Reveal -->
+    <section class="hero-section">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+            <h1>Absolute Elegance in Motion <span>Le Voyage</span></h1>
+            <p>Experience unmatched executive mobility across Botswana. Premium chauffeur allocations, VIP protection protocols, and a world-class luxury fleet at your complete command.</p>
+            <a href="cars.html" class="cta-btn">Explore The Fleet</a>
+        </div>
+    </section>
+
+    <!-- Core Services Preview Grid -->
+    <div class="features-container">
+        <div class="feature-box" data-aos="fade-up" data-aos-delay="100">
+            <h3>Executive Chauffeurs</h3>
+            <p>Professionally vetted drivers trained in high-security defensive driving, seamless routing, and total discretion for corporate and VIP itineraries.</p>
+        </div>
+        <div class="feature-box" data-aos="fade-up" data-aos-delay="200">
+            <h3>Uncompromising Fleet</h3>
+            <p>From the robust Toyota Land Cruiser LC300 to high-performance Mercedes-AMG options, every vehicle undergoes meticulous preservation and detailing.</p>
+        </div>
+        <div class="feature-box" data-aos="fade-up" data-aos-delay="300">
+            <h3>Seamless Booking</h3>
+            <p>Configure custom rental durations, specify multi-car allocations, and receive instant cryptographic reservation confirmations straight to your inbox.</p>
+        </div>
     </div>
 
-    <div class="footer-bottom">
-        DRIVEN BY EXCELLENCE
-    </div>
-
-</footer>
-
-<script src="javascript.js"></script>
+    <!-- AOS Animation Initialization Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+    </script>
 </body>
 </html>
