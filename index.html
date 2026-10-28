@@ -29,6 +29,7 @@
             justify-content: center;
             text-align: center;
             padding: 0 20px;
+            position: relative;
         }
 
         .hero-content {
@@ -70,6 +71,27 @@
         .cta-btn:hover {
             background: #d4a703;
             transform: scale(1.05);
+        }
+
+        /* Scroll Indicator Styling */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #efbf04;
+            opacity: 0.3; /* Starts dim */
+            transition: opacity 0.3s ease;
+            animation: floatArrow 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes floatArrow {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 8px); }
         }
 
         /* Features Grid Preview Section */
@@ -140,39 +162,23 @@
         </div>
     </header>
 
-    <!-- Hero Section with Motion Reveal -->
+    <!-- Hero Section with Motion Reveal & Scroll Indicator -->
     <section class="hero-section">
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
             <h1>Absolute Elegance in Motion <span>Le Voyage</span></h1>
             <p>Experience unmatched executive mobility across Botswana. Premium chauffeur allocations, VIP protection protocols, and a world-class luxury fleet at your complete command.</p>
             <a href="cars.html" class="cta-btn">Explore The Fleet</a>
         </div>
+
+        <!-- Scroll Indicator Arrow -->
+        <div class="scroll-indicator" id="scrollIndicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+        </div>
     </section>
 
     <!-- Core Services Preview Grid -->
     <div class="features-container">
         <div class="feature-box" data-aos="fade-up" data-aos-delay="100">
-            <h3>Executive Chauffeurs</h3>
-            <p>Professionally vetted drivers trained in high-security defensive driving, seamless routing, and total discretion for corporate and VIP itineraries.</p>
-        </div>
-        <div class="feature-box" data-aos="fade-up" data-aos-delay="200">
-            <h3>Uncompromising Fleet</h3>
-            <p>From the robust Toyota Land Cruiser LC300 to high-performance Mercedes-AMG options, every vehicle undergoes meticulous preservation and detailing.</p>
-        </div>
-        <div class="feature-box" data-aos="fade-up" data-aos-delay="300">
-            <h3>Seamless Booking</h3>
-            <p>Configure custom rental durations, specify multi-car allocations, and receive instant cryptographic reservation confirmations straight to your inbox.</p>
-        </div>
-    </div>
-
-    <!-- AOS Animation Initialization Script -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50
-        });
-    </script>
-</body>
-</html>
+            <h3>Executive
