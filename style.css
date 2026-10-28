@@ -8,6 +8,10 @@
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth; /* Enables smooth scrolling globally */
+}
+
 :root {
     /* Premium Color Palette derived from image_564e25.png */
     --bg-dark-olive: #1b1c18;      /* Deepest shadow tone */
@@ -24,6 +28,7 @@ body {
     background-color: var(--bg-dark-olive);
     color: var(--text-light);
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* ==========================================================================
@@ -34,6 +39,9 @@ header {
     padding: 20px 40px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .navbar {
@@ -47,6 +55,11 @@ header {
     height: 45px;
     width: auto;
     display: block;
+    transition: transform 0.2s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.03);
 }
 
 .nav-links {
@@ -75,12 +88,12 @@ header {
 }
 
 /* ==========================================================================
-   3. HERO SECTION
+   3. HERO SECTION & SCROLL MOTION INDICATOR
    ========================================================================== */
 .hero {
     text-align: center;
-    padding: 120px 20px;
-    /* Implements the clean backdrop wall from watermarked_img_57295728633198096.png */
+    padding: 140px 20px;
+    /* Implements the clean backdrop wall from watermarked watermarks */
     background: linear-gradient(to bottom, rgba(81, 84, 74, 0.15), rgba(27, 28, 24, 0.9)), 
                 url('watermarked_img_57295728633198096.png') no-repeat center center;
     background-size: cover;
@@ -88,6 +101,8 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
+    min-height: 85vh;
 }
 
 .hero h1, .hero h2 {
@@ -100,7 +115,19 @@ header {
     text-transform: uppercase;
 }
 
-.hero button {
+.hero h1 span {
+    color: var(--accent-gold);
+}
+
+.hero p {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 750px;
+    line-height: 1.8;
+    margin-bottom: 35px;
+}
+
+.hero button, .cta-btn {
     padding: 14px 35px;
     border: 1px solid var(--accent-gold);
     border-radius: 4px;
@@ -111,13 +138,37 @@ header {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hero button:hover {
+.hero button:hover, .cta-btn:hover {
     background: transparent;
     color: var(--accent-gold);
-    box-shadow: 0 0 15px rgba(239, 191, 4, 0.3);
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(239, 191, 4, 0.3);
+}
+
+/* Scroll Indicator Arrow Animations */
+.scroll-indicator {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--accent-gold);
+    opacity: 0.3; /* Starts dim */
+    transition: opacity 0.3s ease;
+    animation: floatArrow 2s infinite ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes floatArrow {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 8px); }
 }
 
 /* ==========================================================================
@@ -139,6 +190,8 @@ header {
     gap: 30px;
     padding: 20px 40px;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .car-card {
@@ -195,8 +248,9 @@ header {
 }
 
 .car-card button:hover {
-    background: var(--text-light);
-    color: var(--bg-dark-olive);
+    background: var(--accent-gold);
+    color: #111;
+    border-color: var(--accent-gold);
 }
 
 /* ==========================================================================
@@ -250,11 +304,12 @@ form button {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 form button:hover {
     background: var(--accent-gold-hover);
+    transform: scale(1.01);
 }
 
 /* ==========================================================================
