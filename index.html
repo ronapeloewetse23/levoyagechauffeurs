@@ -20,10 +20,10 @@
             overflow-x: hidden;
         }
 
-        /* Hero Section */
+        /* Hero Section with Background Image */
         .hero-section {
             height: 90vh;
-            background: linear-gradient(rgba(11, 12, 16, 0.7), rgba(11, 12, 16, 0.9)), url('images/hero-bg.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(11, 12, 16, 0.75), rgba(11, 12, 16, 0.85)), url('images/hero-bg.jpg') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -83,7 +83,7 @@
             flex-direction: column;
             align-items: center;
             color: #efbf04;
-            opacity: 0.3; /* Starts dim */
+            opacity: 0.3;
             transition: opacity 0.3s ease;
             animation: floatArrow 2s infinite ease-in-out;
             pointer-events: none;
@@ -94,42 +94,85 @@
             50% { transform: translate(-50%, 8px); }
         }
 
-        /* Features Grid Preview Section */
-        .features-container {
+        /* Featured Fleet Section Grid */
+        .section-title {
+            text-align: center;
+            margin: 70px 0 30px;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .section-title span {
+            color: #efbf04;
+        }
+
+        .featured-fleet-container {
             max-width: 1200px;
-            margin: 80px auto;
+            margin: 0 auto 80px;
             padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
-        .feature-box {
-            background: rgba(255, 255, 255, 0.02);
+        .car-card {
+            background: #232620;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px 30px;
             border-radius: 6px;
-            text-align: left;
-            transition: border-color 0.3s ease;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        .feature-box:hover {
+        .car-card:hover {
+            transform: translateY(-8px);
             border-color: rgba(239, 191, 4, 0.4);
         }
 
-        .feature-box h3 {
-            color: #efbf04;
+        .car-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .car-card-body {
+            padding: 25px;
+        }
+
+        .car-card h3 {
+            color: #fff;
             font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .feature-box p {
+        .car-card p {
             color: #b5baaf;
             font-size: 14px;
             line-height: 1.6;
-            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        .car-link-btn {
+            display: inline-block;
+            background: transparent;
+            color: #efbf04;
+            border: 1px solid #efbf04;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .car-link-btn:hover {
+            background: #efbf04;
+            color: #000;
         }
 
         /* Mobile Adaptation */
@@ -137,7 +180,7 @@
             .hero-content h1 {
                 font-size: 32px;
             }
-            .features-container {
+            .featured-fleet-container {
                 grid-template-columns: 1fr;
             }
         }
@@ -162,7 +205,7 @@
         </div>
     </header>
 
-    <!-- Hero Section with Motion Reveal & Scroll Indicator -->
+    <!-- Hero Section with Background Image, Motion Reveal & Scroll Indicator -->
     <section class="hero-section">
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
             <h1>Absolute Elegance in Motion <span>Le Voyage</span></h1>
@@ -178,19 +221,38 @@
         </div>
     </section>
 
-    <!-- Core Services Preview Grid -->
-    <div class="features-container">
-        <div class="feature-box" data-aos="fade-up" data-aos-delay="100">
-            <h3>Executive Chauffeurs</h3>
-            <p>Professionally vetted drivers trained in high-security defensive driving, seamless routing, and total discretion for corporate and VIP itineraries.</p>
+    <!-- Featured Fleet Section -->
+    <h2 class="section-title" data-aos="fade-up">Featured <span>Allocations</span></h2>
+    
+    <div class="featured-fleet-container">
+        <!-- Car 1 -->
+        <div class="car-card" data-aos="fade-up" data-aos-delay="100">
+            <img src="images/bmw-x5.jpg" alt="BMW X5 Executive">
+            <div class="car-card-body">
+                <h3>BMW X5 Executive</h3>
+                <p>Spacious luxury SUV combining robust road presence with plush leather interiors and smooth handling for VIP city or cross-country transfers.</p>
+                <a href="cars.html" class="car-link-btn">Configure Model</a>
+            </div>
         </div>
-        <div class="feature-box" data-aos="fade-up" data-aos-delay="200">
-            <h3>Uncompromising Fleet</h3>
-            <p>From the robust Toyota Land Cruiser LC300 to high-performance Mercedes-AMG options, every vehicle undergoes meticulous preservation and detailing.</p>
+
+        <!-- Car 2 -->
+        <div class="car-card" data-aos="fade-up" data-aos-delay="200">
+            <img src="images/land-cruiser.jpg" alt="Toyota Land Cruiser LC300">
+            <div class="car-card-body">
+                <h3>Toyota Land Cruiser LC300</h3>
+                <p>The pinnacle of rugged sophistication. Built for uncompromising reliability across all terrains without sacrificing elite passenger comfort.</p>
+                <a href="cars.html" class="car-link-btn">Configure Model</a>
+            </div>
         </div>
-        <div class="feature-box" data-aos="fade-up" data-aos-delay="300">
-            <h3>Seamless Booking</h3>
-            <p>Configure custom rental durations, specify multi-car allocations, and receive instant cryptographic reservation confirmations straight to your inbox.</p>
+
+        <!-- Car 3 -->
+        <div class="car-card" data-aos="fade-up" data-aos-delay="300">
+            <img src="images/mercedes-amg.jpg" alt="Mercedes-AMG GLE 63 S">
+            <div class="car-card-body">
+                <h3>Mercedes-AMG GLE 63 S</h3>
+                <p>High-performance luxury crossover engineered to deliver blistering power paired with uncompromising refinement and executive styling.</p>
+                <a href="cars.html" class="car-link-btn">Configure Model</a>
+            </div>
         </div>
     </div>
 
