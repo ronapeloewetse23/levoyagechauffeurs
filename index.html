@@ -20,10 +20,11 @@
             overflow-x: hidden;
         }
 
-        /* Hero Section with Background Image & Seamless Bottom Blend */
+        /* Hero Section with Fixed Background Image */
         .hero-section {
             height: 90vh;
-            background: linear-gradient(to bottom, rgba(11, 12, 16, 0.65), rgba(11, 12, 16, 0.95) 90%, #0b0c10), url('images/homepagebackgroundtemp.jpg') center/cover no-repeat;
+            /* background-attachment: fixed locks the image in place while scrolling */
+            background: linear-gradient(rgba(11, 12, 16, 0.7), rgba(11, 12, 16, 0.85)), url('images/homepagebackgroundtemp.jpg') center/cover no-repeat fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -206,7 +207,7 @@
         </div>
     </header>
 
-    <!-- Hero Section with Background Image, Motion Reveal & Scroll Indicator -->
+    <!-- Hero Section with Fixed Background Image, Motion Reveal & Scroll Indicator -->
     <section class="hero-section">
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
             <h1>Absolute Elegance in Motion <span>Le Voyage</span></h1>
