@@ -10,21 +10,20 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* Base page theme settings */
+        /* Base page theme settings with a fixed global background image */
         body {
-            background-color: #0b0c10;
+            background: linear-gradient(rgba(11, 12, 16, 0.82), rgba(11, 12, 16, 0.92)), url('images/homepagebackgroundtemp.jpg') center/cover no-repeat fixed;
             color: #f7f5f5;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Hero Section with Fixed Background Image */
+        /* Hero Section */
         .hero-section {
             height: 90vh;
-            /* background-attachment: fixed locks the image in place while scrolling */
-            background: linear-gradient(rgba(11, 12, 16, 0.7), rgba(11, 12, 16, 0.85)), url('images/homepagebackgroundtemp.jpg') center/cover no-repeat fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -119,11 +118,12 @@
         }
 
         .car-card {
-            background: #232620;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(35, 38, 32, 0.9); /* Slightly translucent to let the fixed background peek through stylishly */
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 6px;
             overflow: hidden;
             transition: transform 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .car-card:hover {
@@ -207,7 +207,7 @@
         </div>
     </header>
 
-    <!-- Hero Section with Fixed Background Image, Motion Reveal & Scroll Indicator -->
+    <!-- Hero Section with Motion Reveal & Scroll Indicator -->
     <section class="hero-section">
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
             <h1>Absolute Elegance in Motion <span>Le Voyage</span></h1>
