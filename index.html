@@ -181,4 +181,39 @@
     <!-- Core Services Preview Grid -->
     <div class="features-container">
         <div class="feature-box" data-aos="fade-up" data-aos-delay="100">
-            <h3>Executive
+            <h3>Executive Chauffeurs</h3>
+            <p>Professionally vetted drivers trained in high-security defensive driving, seamless routing, and total discretion for corporate and VIP itineraries.</p>
+        </div>
+        <div class="feature-box" data-aos="fade-up" data-aos-delay="200">
+            <h3>Uncompromising Fleet</h3>
+            <p>From the robust Toyota Land Cruiser LC300 to high-performance Mercedes-AMG options, every vehicle undergoes meticulous preservation and detailing.</p>
+        </div>
+        <div class="feature-box" data-aos="fade-up" data-aos-delay="300">
+            <h3>Seamless Booking</h3>
+            <p>Configure custom rental durations, specify multi-car allocations, and receive instant cryptographic reservation confirmations straight to your inbox.</p>
+        </div>
+    </div>
+
+    <!-- AOS Animation & Scroll Indicator Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+
+        // Dynamic Scroll Indicator Controller - Fades out instantly on scroll
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > 20) {
+                scrollIndicator.style.opacity = 0;
+            } else {
+                scrollIndicator.style.opacity = 0.3;
+            }
+        });
+    </script>
+</body>
+</html>
